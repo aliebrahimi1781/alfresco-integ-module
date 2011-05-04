@@ -147,8 +147,8 @@ public class Application extends Controller {
     }
     
     public static void getChild(String path){
+    	Session session = (Session) renderArgs.get("session");
     	
-    
     }
     
 
