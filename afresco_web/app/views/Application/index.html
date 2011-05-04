@@ -1,0 +1,55 @@
+#{extends 'main.html' /}
+
+${text?.raw()}
+*{
+    
+%{type.getPropertyDefinitions().each{k,v->  }%
+<div> <span style='background:gray;color:white'>${k}</span>  <span>${v}</span> </div>
+%{ } }%
+}*
+#{list items:type.propertyDefinitions, as:'prop'}
+#{/list}
+<h2>cmis documents</h2>
+<table width='100%' style='border:1px solid gray;'>
+    <tr>
+        <td style='border-bottom:1px solid gray;' width='100px'>Name</td>
+        <td style='border-bottom:1px solid gray;'>ID</td>
+    </tr>
+#{list items:docs, as:'item'}
+    <tr>
+        <td>${item.name}</td>
+        <td>${item.id}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+           <table width='100%' style='background:gray;color:white;'>
+               <tr>
+                   <td style='background:orange;color:black;'>Property Name</td>
+                   <td style='background:orange;color:black;'>Property Value</td>
+                   <td style='background:orange;color:black;'>Display Name</td>
+               </tr>
+    #{list items:item.properties, as :'p'}
+*{
+    #{if true}
+}*    
+#{if p.getQueryName().startsWith('test')}
+               <tr>
+                    <td>${p.queryName}</td>
+                    <td>${p.firstValue}</td>
+                    <td>${p.displayName}</td>
+               </tr>
+    #{/if}
+    #{/list}
+           </table> 
+        </td>
+    </tr>
+#{/list}
+</table>
+
+#{if children}
+	#{list items:children, as:'child' }
+		<div>${child.name}</div>
+	#{/list} 
+#{/if}
+
